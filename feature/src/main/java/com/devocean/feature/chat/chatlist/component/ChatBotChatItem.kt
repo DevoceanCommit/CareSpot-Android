@@ -28,9 +28,10 @@ fun ChatBotChatItem(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Spacer(modifier = Modifier.width(20.dp))
         Icon(
             painter = painterResource(R.drawable.ic_person_24),
             contentDescription = "my_profile",

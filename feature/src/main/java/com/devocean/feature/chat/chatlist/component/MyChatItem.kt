@@ -29,7 +29,7 @@ fun MyChatItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -49,6 +49,7 @@ fun MyChatItem(
                 .background(SpotSub)
                 .padding(5.dp),
         )
+        Spacer(modifier = Modifier.width(20.dp))
     }
 }
 
