@@ -16,13 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.devocean.core.designsystem.component.item.YoutubeItem
+import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.R
-import com.devocean.feature.home.component.CategoryTopBar
 import com.devocean.feature.home.component.HomeTopBar
-import com.devocean.core.designsystem.component.item.YoutubeItem
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -69,7 +70,6 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     onProfileClick: () -> Unit = {},
     onFixClick: () -> Unit = {},
-    onCategoryClick: () -> Unit = {},
     onSearchClick: (String) -> Unit = {},
     dataList: List<YouTubeData>
 ) {
@@ -78,22 +78,7 @@ fun HomeScreen(
             .fillMaxWidth()
             .background(Color.White)
     ) {
-        HomeTopBar(
-            value = "",
-            onValueChanged = { search ->
-                onSearchClick(search)
-            },
-            onProfileClick = {
-                onProfileClick()
-            },
-            onFixClick = {
-                onFixClick()
-            }
-        )
-        HorizontalDivider(thickness = 2.dp, color = SpotGray)
-        CategoryTopBar(
-            onCategoryClick = { onCategoryClick() }
-        )
+        HomeTopBar()
         HorizontalDivider(thickness = 2.dp, color = SpotGray)
         LazyColumn(
             modifier = modifier
@@ -117,5 +102,26 @@ fun HomeScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun HomeScreenPreview() {
+    DevoceanSpotTheme {
+        val mockDataList = listOf(
+            YouTubeData(
+                image = painterResource(id = R.drawable.ic_launcher_background),
+                title = "데보션 영 3기 생생한 발대식 현장",
+                category = "IT",
+                bookmark = true,
+                summary = "한줄요약"
+            )
+        )
+        HomeScreen(
+            dataList = mockDataList,
+            onSearchClick = {},
+            onProfileClick = { }
+        )
     }
 }
