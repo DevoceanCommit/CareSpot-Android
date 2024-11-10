@@ -21,6 +21,7 @@ import com.devocean.core.designsystem.component.button.TextButton
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.R
+import com.devocean.feature.chat.chatlist.component.MyChatItem
 import com.devocean.feature.chat.chatlist.component.MyPageTopBar
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -51,10 +52,8 @@ fun ChatListScreen(
             .fillMaxWidth()
             .background(Color.White)
     ) {
-        MyPageTopBar(
-            onBackClick = { onBackClick() }
-        )
-        
+        MyPageTopBar(onBackClick = onBackClick)
+        MyChatItem(text  = "오늘 날씨는 어떤가요?")
     }
 }
 
