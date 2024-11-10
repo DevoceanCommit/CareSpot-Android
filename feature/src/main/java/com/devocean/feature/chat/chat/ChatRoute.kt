@@ -1,6 +1,7 @@
 package com.devocean.feature.chat.chat
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun ChatRoute(
+    onClick: () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -52,13 +54,15 @@ fun ChatRoute(
 
     ChatScreen(
         dataList = mockDataList,
+        onCLick = onClick
     )
 }
 
 @Composable
 fun ChatScreen(
+    dataList: List<YouTubeData>,
+    onCLick: () -> Unit,
     modifier: Modifier = Modifier,
-    dataList: List<YouTubeData>
 ) {
     Column(
         modifier = modifier
@@ -83,6 +87,7 @@ fun ChatScreen(
                         title = item.title,
                         date = item.date,
                         summary = item.summary,
+                        modifier = Modifier.clickable { onCLick() }
                     )
                 }
             }
@@ -107,7 +112,8 @@ fun ChatScreenPreview() {
             )
         )
         ChatScreen(
-            dataList = mockDataList
+            dataList = mockDataList,
+            onCLick = {}
         )
     }
 }
