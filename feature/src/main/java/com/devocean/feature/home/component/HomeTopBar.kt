@@ -2,6 +2,7 @@ package com.devocean.feature.home.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +26,7 @@ fun HomeTopBar(
             color = SpotMain,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 10.dp)
         )
     }
 }

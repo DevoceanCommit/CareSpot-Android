@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.home.component.HomeProfile
+import com.devocean.feature.home.component.HomeSensorData
 import com.devocean.feature.home.component.HomeTopBar
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -47,13 +48,14 @@ fun HomeScreen(
         HomeTopBar()
         Spacer(modifier = Modifier.height(5.dp))
         HorizontalDivider(thickness = 2.dp, color = SpotGray)
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         HomeProfile(modifier = Modifier.padding(start = 10.dp))
-
+        Spacer(modifier = Modifier.height(30.dp))
+        HomeSensorData()
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
     DevoceanSpotTheme {
