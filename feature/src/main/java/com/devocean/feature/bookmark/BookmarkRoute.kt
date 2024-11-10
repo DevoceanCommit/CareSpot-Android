@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
@@ -21,7 +22,7 @@ import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.R
 import com.devocean.feature.bookmark.component.BookmarkTopBar
 import com.devocean.feature.home.YouTubeData
-import com.devocean.feature.home.component.YoutubeItem
+import com.devocean.core.designsystem.component.item.YoutubeItem
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -38,20 +39,21 @@ fun BookmarkRoute(
 
     val mockDataList = listOf(
         YouTubeData(
-            image = painterResource(id = R.drawable.img_youtube_default_pic),
-            title = "Heading",
-            category = "카테고리",
-            bookmark = false,
+            image = painterResource(id = R.drawable.img_youtube_1),
+            title = "데보션 영 3기 생생한 발대식 현장",
+            category = "IT",
+            bookmark = true,
             summary = "한줄요약"
         ),
         YouTubeData(
-            image = painterResource(id = R.drawable.img_youtube_default_pic),
-            title = "Heading",
-            category = "카테고리",
+            image = painterResource(id = R.drawable.img_youtube_2),
+            title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
+            category = "IT",
             bookmark = false,
             summary = "한줄요약"
         )
     )
+
     BookmarkScreen(
         dataList = mockDataList,
         onBackClick = { navigateUp() }
@@ -72,7 +74,7 @@ fun BookmarkScreen(
         BookmarkTopBar(
             onBackClick = { onBackClick() }
         )
-        Divider(thickness = 2.dp, color = SpotGray)
+        HorizontalDivider(thickness = 2.dp, color = SpotGray)
         LazyColumn(
             modifier = modifier
                 .fillMaxSize()
@@ -88,9 +90,8 @@ fun BookmarkScreen(
                         image = item.image,
                         title = item.title,
                         category = item.category,
-                        bookmark = item.bookmark,
                         summary = item.summary,
-                        isBookmark = true,
+                        isBookmark = item.bookmark,
                         spotDate = "spot date: 10/14"
                     )
                 }

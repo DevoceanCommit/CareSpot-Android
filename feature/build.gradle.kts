@@ -73,7 +73,7 @@ dependencies {
 
     implementation(libs.material)
     implementation(libs.androidx.material3.android)
-    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.compose.ui.tooling)
     implementation(libs.androidx.ui.graphics)
 
     testImplementation(libs.junit)
