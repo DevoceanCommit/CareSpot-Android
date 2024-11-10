@@ -58,7 +58,7 @@ fun ChatRoute(
 
     val mockDataList = listOf(
         ChatListModel(
-            title = "데보션 영 3기 생생한 발대식 현장",
+            title = "생생한 발대식 현장",
             date = "2024-11-10 15:11",
             summary = "한줄요약"
         ),
@@ -118,7 +118,7 @@ fun ChatScreenPreview() {
     DevoceanSpotTheme {
         val mockDataList = listOf(
             ChatListModel(
-                title = "데보션 영 3기 생생한 발대식 현장",
+                title = "생생한 발대식 현장",
                 date = "2024-11-10 15:11",
                 summary = "한줄요약"
             ),

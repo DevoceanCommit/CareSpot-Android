@@ -12,15 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.Gray400
-import com.devocean.core.designsystem.theme.SpotGray
-import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
+import com.devocean.feature.R
 
 @Composable
 fun HomeSensorData(
@@ -36,9 +35,9 @@ fun HomeSensorData(
 
     Column(modifier = modifier) {
         Text(
-            text = "센서 데이터 확인",
+            text = stringResource(R.string.home_sensor_title),
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(start = 5.dp)
+            modifier = Modifier.padding(start = 10.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
         Row {
