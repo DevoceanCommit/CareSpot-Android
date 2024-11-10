@@ -38,7 +38,7 @@ class MainNavigator(
 
         when (tab) {
             MainTab.HOME -> navController.navigateHome(navOptions)
-            MainTab.BOOKMARK -> navController.navigateBookmark(navOptions)
+            MainTab.CHAT -> navController.navigateBookmark(navOptions)
         }
     }
 

@@ -14,4 +14,7 @@
     <string name="plus_dialog_title">저장하고 싶은 링크를\n붙여 넣어 주세요</string>
     <string name="plus_dialog_url">url</string>
     <string name="plus_dialog_summary">요약하기</string>
+
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_chat">Chat</string>
 </resources>

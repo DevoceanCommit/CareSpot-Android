@@ -13,13 +13,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
+import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.util.NoRippleInteractionSource
 import com.devocean.feature.bookmark.navigation.bookmarkNavGraph
@@ -82,17 +86,19 @@ private fun MainBottomBar(
                     },
                     icon = {
                         Icon(
-                            painter = painterResource(
-                                id = if (currentTab == itemType) itemType.selectedIcon
-                                else itemType.unselectedIcon
-                            ),
-                            contentDescription = null,
-                            modifier = Modifier.size(23.dp)
+                            painter = painterResource(id = (itemType.icon)),
+                            contentDescription = stringResource(id = itemType.contentDescription)
+                        )
+                    },
+                    label = {
+                        Text(
+                            stringResource(id = itemType.contentDescription),
+                            fontSize = 9.sp
                         )
                     },
                     colors = androidx.compose.material3.NavigationBarItemDefaults
                         .colors(
-                            selectedIconColor = Color.Black,
+                            selectedIconColor = Color.Red,
                             unselectedIconColor = Color.Black,
                             indicatorColor = SpotSub
                         )

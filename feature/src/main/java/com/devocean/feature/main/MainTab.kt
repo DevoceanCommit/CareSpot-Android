@@ -1,6 +1,7 @@
 package com.devocean.feature.main
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import com.devocean.core.navigation.MainTabRoute
 import com.devocean.feature.R
@@ -8,18 +9,18 @@ import com.devocean.feature.bookmark.navigation.Bookmark
 import com.devocean.feature.home.navigation.Home
 
 enum class MainTab(
-    @DrawableRes val selectedIcon: Int,
-    @DrawableRes val unselectedIcon: Int,
+    @DrawableRes val icon: Int,
+    @StringRes val contentDescription: Int,
     val route: MainTabRoute,
 ) {
     HOME(
-        selectedIcon = R.drawable.img_home_32,
-        unselectedIcon = R.drawable.img_home_unselected_32,
+        icon = R.drawable.ic_home_24,
+        contentDescription = R.string.bottom_nav_home,
         route = Home
     ),
-    BOOKMARK(
-        selectedIcon = R.drawable.ic_chat_24,
-        unselectedIcon = R.drawable.ic_chat_24,
+    CHAT(
+        icon = R.drawable.ic_chat_24,
+        contentDescription = R.string.bottom_nav_chat,
         route = Bookmark
     );
 
