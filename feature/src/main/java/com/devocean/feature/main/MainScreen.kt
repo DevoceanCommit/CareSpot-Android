@@ -29,7 +29,6 @@ import com.devocean.feature.mypage.navigation.myPageNavGraph
 @Composable
 fun MainScreen(
     navigator: MainNavigator = rememberMainNavigator(),
-    onPlusDialogClick: () -> Unit = {}
 ) {
     Scaffold(
         bottomBar = {
