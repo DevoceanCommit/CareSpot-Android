@@ -54,58 +54,7 @@ fun ChatListScreen(
         MyPageTopBar(
             onBackClick = { onBackClick() }
         )
-        Divider(thickness = 2.dp, color = SpotGray)
-        Spacer(modifier = modifier.weight(1f))
-        TextButton(
-            text = "A",
-            onButtonClick = {},
-            modifier = modifier
-                .size(width = 90.dp, height = 90.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-        Spacer(modifier = modifier.weight(1f))
-        Divider(thickness = 2.dp, color = SpotGray)
-        Text(
-            text = stringResource(id = R.string.mypage_name),
-            modifier = modifier.padding(
-                top = 20.dp,
-                start = 20.dp
-            ),
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "김데보션",
-            modifier = modifier.padding(
-                top = 20.dp,
-                start = 20.dp
-            )
-        )
-        Text(
-            text = stringResource(id = R.string.mypage_description),
-            modifier = modifier.padding(
-                top = 20.dp,
-                start = 20.dp
-            ),
-            fontWeight = FontWeight.Bold,
-        )
-        Text(
-            text = "데보션영 파이팅~",
-            modifier = modifier.padding(
-                top = 20.dp,
-                start = 20.dp
-            )
-        )
-        Text(
-            text = stringResource(id = R.string.mypage_bookmark),
-            modifier = modifier.padding(
-                top = 20.dp,
-                start = 20.dp
-            ),
-            fontWeight = FontWeight.Bold,
-        )
-        Spacer(modifier = modifier.weight(1f))
-        Divider(thickness = 2.dp, color = SpotGray)
-        Spacer(modifier = modifier.weight(2f))
+        
     }
 }
 

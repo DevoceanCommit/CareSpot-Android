@@ -31,7 +31,7 @@ fun MyPageTopBar(
             }
         )
         Text(
-            text = stringResource(id = R.string.mypage_title),
+            text = stringResource(id = R.string.chatlist_title),
             modifier = modifier.padding(start = 10.dp)
         )
     }
