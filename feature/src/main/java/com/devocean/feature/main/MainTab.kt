@@ -18,8 +18,8 @@ enum class MainTab(
         route = Home
     ),
     BOOKMARK(
-        selectedIcon = R.drawable.img_bookmark_32,
-        unselectedIcon = R.drawable.img_bookmark_unselected_32,
+        selectedIcon = R.drawable.ic_chat_24,
+        unselectedIcon = R.drawable.ic_chat_24,
         route = Bookmark
     );
 

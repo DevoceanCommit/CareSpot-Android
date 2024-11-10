@@ -7,11 +7,8 @@ import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -22,12 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import androidx.navigation.compose.NavHost
-import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.util.NoRippleInteractionSource
-import com.devocean.feature.R
 import com.devocean.feature.bookmark.navigation.bookmarkNavGraph
 import com.devocean.feature.home.navigation.homeNavGraph
 import com.devocean.feature.mypage.navigation.myPageNavGraph
@@ -46,30 +40,6 @@ fun MainScreen(
                     currentTab = navigator.currentTab,
                     onTabSelected = navigator::navigate
                 )
-                AnimatedVisibility(
-                    visible = navigator.showBottomBar(),
-                    enter = expandVertically(expandFrom = Alignment.Top),
-                    exit = shrinkVertically(animationSpec = tween()),
-                    modifier = Modifier.align(Alignment.TopCenter)
-                ) {
-                    FloatingActionButton(
-                        shape = CircleShape,
-                        onClick = {
-                            onPlusDialogClick()
-                        },
-                        containerColor = SpotMain,
-                        contentColor = Color.Black,
-                        modifier = Modifier
-                            .size(width = 70.dp, height = 70.dp)
-                            .offset(y = (-28).dp)
-                            .zIndex(1f)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_add_24),
-                            contentDescription = null
-                        )
-                    }
-                }
             }
         },
     ) { innerPadding ->

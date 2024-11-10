@@ -39,14 +39,14 @@ fun BookmarkRoute(
 
     val mockDataList = listOf(
         YouTubeData(
-            image = painterResource(id = R.drawable.img_youtube_1),
+            image = painterResource(id = R.drawable.ic_launcher_background),
             title = "데보션 영 3기 생생한 발대식 현장",
             category = "IT",
             bookmark = true,
             summary = "한줄요약"
         ),
         YouTubeData(
-            image = painterResource(id = R.drawable.img_youtube_2),
+            image = painterResource(id = R.drawable.ic_launcher_background),
             title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
             category = "IT",
             bookmark = false,
