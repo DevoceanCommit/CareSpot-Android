@@ -18,10 +18,10 @@ import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 
 @Composable
-fun ChatLIstItem(
+fun ChatListItem(
     modifier: Modifier = Modifier,
     title: String,
-    date : String,
+    date: String,
     summary: String,
 ) {
     Column(
@@ -30,7 +30,8 @@ fun ChatLIstItem(
             .background(color = SpotGray)
             .padding(15.dp)
             .fillMaxWidth()
-    ) { Text(
+    ) {
+        Text(
             text = title,
             fontWeight = FontWeight.Bold,
         )
@@ -45,7 +46,7 @@ fun ChatLIstItem(
 @Composable
 private fun ChatListItemPreview() {
     DevoceanSpotTheme {
-        ChatLIstItem(
+        ChatListItem(
             title = "데보션 영 3기 생생한 발대식 현장",
             date = "2024-11-10 15:11",
             summary = "한줄요약",

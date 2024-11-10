@@ -26,7 +26,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
-import com.devocean.feature.chat.chat.component.ChatLIstItem
+import com.devocean.feature.chat.chat.component.ChatListItem
 import com.devocean.feature.chat.chat.component.ChatTopBar
 import com.devocean.feature.chat.chat.model.ChatListModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -100,7 +100,7 @@ fun ChatScreen(
                 Box(
                     modifier = Modifier.padding(horizontal = 20.dp)
                 ) {
-                    ChatLIstItem(
+                    ChatListItem(
                         title = item.title,
                         date = item.date,
                         summary = item.summary,
