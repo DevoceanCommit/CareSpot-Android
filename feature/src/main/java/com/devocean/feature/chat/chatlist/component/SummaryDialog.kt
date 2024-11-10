@@ -57,7 +57,7 @@ fun SummaryDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun SummaryDialogPreview() {
+private fun SummaryDialogPreview() {
     DevoceanSpotTheme {
         SummaryDialog(
             onDismissRequest = {},

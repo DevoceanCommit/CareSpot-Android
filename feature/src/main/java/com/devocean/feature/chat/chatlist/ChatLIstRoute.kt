@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.devocean.core.designsystem.component.button.ImageButton
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotSub
@@ -19,21 +22,34 @@ import com.devocean.feature.R
 import com.devocean.feature.chat.chatlist.component.ChatBotChatItem
 import com.devocean.feature.chat.chatlist.component.MyChatItem
 import com.devocean.feature.chat.chatlist.component.MyPageTopBar
+import com.devocean.feature.chat.chatlist.component.SummaryDialog
 
 @Composable
 fun ChatListRoute(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    viewModel: ChatListViewModel = hiltViewModel()
 ) {
 
+    val action by viewModel.action.collectAsStateWithLifecycle()
+
+    if (action == true) {
+        SummaryDialog(
+            onDismissRequest = { viewModel.updateSummaryDialog(false) },
+            text = "이것은 한 줄 요약입니다."
+        )
+    }
+
     ChatListScreen(
-        onBackClick = onBackClick
+        onBackClick = onBackClick,
+        onDialogClick = { viewModel.updateSummaryDialog(true) }
     )
 }
 
 @Composable
 fun ChatListScreen(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit = {},
+    onBackClick: () -> Unit,
+    onDialogClick: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -51,7 +67,7 @@ fun ChatListScreen(
         Spacer(modifier = Modifier.weight(5f))
         ImageButton(
             paddingVertical = 10.dp,
-            onButtonClick = {},
+            onButtonClick = onDialogClick,
             painterResource = R.drawable.ic_add_24,
             containerColor = SpotSub,
             contentColor = Color.White,
@@ -67,6 +83,9 @@ fun ChatListScreen(
 @Composable
 fun ChatListScreenPreview() {
     DevoceanSpotTheme {
-        ChatListScreen()
+        ChatListScreen(
+            onDialogClick = {},
+            onBackClick = {}
+        )
     }
 }
