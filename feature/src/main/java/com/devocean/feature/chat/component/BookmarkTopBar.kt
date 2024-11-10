@@ -1,4 +1,4 @@
-package com.devocean.feature.bookmark.component
+package com.devocean.feature.chat.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -1,4 +1,4 @@
-package com.devocean.feature.bookmark
+package com.devocean.feature.chat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -20,13 +19,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.R
-import com.devocean.feature.bookmark.component.BookmarkTopBar
+import com.devocean.feature.chat.component.BookmarkTopBar
 import com.devocean.feature.home.YouTubeData
 import com.devocean.core.designsystem.component.item.YoutubeItem
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun BookmarkRoute(
+fun ChatRoute(
     navigateUp: () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
@@ -54,14 +53,14 @@ fun BookmarkRoute(
         )
     )
 
-    BookmarkScreen(
+    ChatScreen(
         dataList = mockDataList,
         onBackClick = { navigateUp() }
     )
 }
 
 @Composable
-fun BookmarkScreen(
+fun ChatScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {},
     dataList: List<YouTubeData>

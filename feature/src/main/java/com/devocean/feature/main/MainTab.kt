@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import com.devocean.core.navigation.MainTabRoute
 import com.devocean.feature.R
-import com.devocean.feature.bookmark.navigation.Bookmark
+import com.devocean.feature.chat.navigation.Chat
 import com.devocean.feature.home.navigation.Home
 
 enum class MainTab(
@@ -21,7 +21,7 @@ enum class MainTab(
     CHAT(
         icon = R.drawable.ic_chat_24,
         contentDescription = R.string.bottom_nav_chat,
-        route = Bookmark
+        route = Chat
     );
 
     companion object {

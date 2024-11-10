@@ -26,7 +26,7 @@ import com.devocean.core.designsystem.theme.Gray400
 import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.util.NoRippleInteractionSource
-import com.devocean.feature.bookmark.navigation.bookmarkNavGraph
+import com.devocean.feature.chat.navigation.chatNavGraph
 import com.devocean.feature.home.navigation.homeNavGraph
 import com.devocean.feature.mypage.navigation.myPageNavGraph
 
@@ -55,7 +55,7 @@ fun MainScreen(
                 startDestination = navigator.startDestination
             ) {
                 homeNavGraph(navHostController = navigator.navController)
-                bookmarkNavGraph(navHostController = navigator.navController)
+                chatNavGraph(navHostController = navigator.navController)
                 myPageNavGraph(navHostController = navigator.navController)
             }
         }
