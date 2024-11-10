@@ -68,7 +68,7 @@ fun ChatListScreen(
         ImageButton(
             paddingVertical = 10.dp,
             onButtonClick = onDialogClick,
-            painterResource = R.drawable.ic_add_24,
+            painterResource = R.drawable.ic_notes_24,
             containerColor = SpotSub,
             contentColor = Color.White,
             modifier = Modifier
