@@ -19,8 +19,8 @@ import com.devocean.core.designsystem.component.button.ImageButton
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.feature.R
-import com.devocean.feature.chat.chatlist.component.ChatBotChatItem
-import com.devocean.feature.chat.chatlist.component.MyChatItem
+import com.devocean.core.designsystem.component.item.ChatBotChatItem
+import com.devocean.core.designsystem.component.item.MyChatItem
 import com.devocean.feature.chat.chatlist.component.MyPageTopBar
 import com.devocean.feature.chat.chatlist.component.SummaryDialog
 

@@ -2,6 +2,7 @@
     <string name="app_name">DevoceanSpot</string>
 
     <string name="home_top_bar_title">Care App</string>
+    <string name="home_latest_title">최근 챗봇 이력</string>
 
     <string name="bookmark_title">BookMark</string>
 

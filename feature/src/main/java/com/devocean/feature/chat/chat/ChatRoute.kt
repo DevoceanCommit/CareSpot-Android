@@ -28,7 +28,6 @@ import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.chat.chat.component.ChatLIstItem
 import com.devocean.feature.chat.chat.component.ChatTopBar
-import com.devocean.feature.home.YouTubeData
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
