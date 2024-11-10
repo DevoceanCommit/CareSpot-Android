@@ -7,6 +7,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.devocean.core.navigation.MainTabRoute
 import com.devocean.feature.chat.chat.ChatRoute
+import com.devocean.feature.chat.chatlist.navigation.navigateChatList
 import kotlinx.serialization.Serializable
 
 fun NavController.navigateChat(navOptions: NavOptions? = null) {
@@ -20,7 +21,9 @@ fun NavGraphBuilder.chatNavGraph(
     navHostController: NavHostController,
 ) {
     composable<Chat> {
-        ChatRoute()
+        ChatRoute(
+            navigateToChatList = { navHostController.navigateChatList() }
+        )
     }
 }
 

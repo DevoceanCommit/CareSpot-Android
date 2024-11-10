@@ -14,12 +14,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.chat.chat.component.ChatLIstItem
@@ -29,14 +33,27 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun ChatRoute(
-    onClick: () -> Unit
+    navigateToChatList: () -> Unit,
+    viewModel: ChatViewModel = hiltViewModel(),
 ) {
     val systemUiController = rememberSystemUiController()
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     SideEffect {
         systemUiController.setStatusBarColor(
             color = Color.White
         )
+    }
+
+    LaunchedEffect(viewModel.sideEffects, lifecycleOwner) {
+        viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
+            .collect { sideEffect ->
+                when (sideEffect) {
+                  is ChatSideEffect.NavigateToChatList->{
+                      navigateToChatList()
+                  }
+                }
+            }
     }
 
     val mockDataList = listOf(
@@ -54,7 +71,7 @@ fun ChatRoute(
 
     ChatScreen(
         dataList = mockDataList,
-        onCLick = onClick
+        onCLick = viewModel::navigateToChatList
     )
 }
 
