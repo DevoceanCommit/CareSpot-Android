@@ -1,17 +1,14 @@
 <resources>
     <string name="app_name">DevoceanSpot</string>
 
-    <string name="home_category_first">카테고리</string>
-    <string name="home_text_field_hint">Search</string>
+    <string name="home_top_bar_title">Care App</string>
+    <string name="home_latest_title">최근 챗봇 이력</string>
+    <string name="home_sensor_title">센서 데이터 확인</string>
 
     <string name="bookmark_title">BookMark</string>
 
-    <string name="mypage_title">Video Summary</string>
-    <string name="mypage_name">이름</string>
-    <string name="mypage_description">자기소개</string>
-    <string name="mypage_bookmark">북마크한 영상</string>
+    <string name="chatlist_title">챗봇 이력  확인</string>
 
-    <string name="plus_dialog_title">저장하고 싶은 링크를\n붙여 넣어 주세요</string>
-    <string name="plus_dialog_url">url</string>
-    <string name="plus_dialog_summary">요약하기</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_chat">Chat</string>
 </resources>

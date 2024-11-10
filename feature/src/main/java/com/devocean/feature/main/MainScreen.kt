@@ -1,41 +1,38 @@
 package com.devocean.feature.main
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
+import com.devocean.core.designsystem.theme.Gray400
 import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.util.NoRippleInteractionSource
-import com.devocean.feature.R
-import com.devocean.feature.bookmark.navigation.bookmarkNavGraph
+import com.devocean.feature.chat.chat.navigation.chatNavGraph
+import com.devocean.feature.chat.chatlist.navigation.chatListNavGraph
 import com.devocean.feature.home.navigation.homeNavGraph
-import com.devocean.feature.mypage.navigation.myPageNavGraph
 
 @Composable
 fun MainScreen(
     navigator: MainNavigator = rememberMainNavigator(),
-    onPlusDialogClick: () -> Unit = {}
 ) {
     Scaffold(
         bottomBar = {
@@ -46,30 +43,6 @@ fun MainScreen(
                     currentTab = navigator.currentTab,
                     onTabSelected = navigator::navigate
                 )
-                AnimatedVisibility(
-                    visible = navigator.showBottomBar(),
-                    enter = expandVertically(expandFrom = Alignment.Top),
-                    exit = shrinkVertically(animationSpec = tween()),
-                    modifier = Modifier.align(Alignment.TopCenter)
-                ) {
-                    FloatingActionButton(
-                        shape = CircleShape,
-                        onClick = {
-                            onPlusDialogClick()
-                        },
-                        containerColor = SpotMain,
-                        contentColor = Color.Black,
-                        modifier = Modifier
-                            .size(width = 70.dp, height = 70.dp)
-                            .offset(y = (-28).dp)
-                            .zIndex(1f)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_add_24),
-                            contentDescription = null
-                        )
-                    }
-                }
             }
         },
     ) { innerPadding ->
@@ -82,8 +55,8 @@ fun MainScreen(
                 startDestination = navigator.startDestination
             ) {
                 homeNavGraph(navHostController = navigator.navController)
-                bookmarkNavGraph(navHostController = navigator.navController)
-                myPageNavGraph(navHostController = navigator.navController)
+                chatNavGraph(navHostController = navigator.navController)
+                chatListNavGraph(navHostController = navigator.navController)
             }
         }
     }
@@ -98,10 +71,8 @@ private fun MainBottomBar(
 ) {
     AnimatedVisibility(
         visible = isVisible,
-        enter = expandVertically(expandFrom = Alignment.Top) { 20 },
-        exit = shrinkVertically(animationSpec = tween()) { fullHeight ->
-            fullHeight / 2
-        },
+        enter = fadeIn() + slideIn { IntOffset(0, 0) },
+        exit = fadeOut() + slideOut { IntOffset(0, 0) }
     ) {
         NavigationBar(containerColor = SpotSub) {
             tabs.forEach { itemType ->
@@ -113,18 +84,20 @@ private fun MainBottomBar(
                     },
                     icon = {
                         Icon(
-                            painter = painterResource(
-                                id = if (currentTab == itemType) itemType.selectedIcon
-                                else itemType.unselectedIcon
-                            ),
-                            contentDescription = null,
-                            modifier = Modifier.size(23.dp)
+                            painter = painterResource(id = (itemType.icon)),
+                            contentDescription = stringResource(id = itemType.contentDescription)
+                        )
+                    },
+                    label = {
+                        Text(
+                            stringResource(id = itemType.contentDescription),
+                            fontSize = 9.sp
                         )
                     },
                     colors = androidx.compose.material3.NavigationBarItemDefaults
                         .colors(
-                            selectedIconColor = Color.Black,
-                            unselectedIconColor = Color.Black,
+                            selectedIconColor = SpotMain,
+                            unselectedIconColor = Gray400,
                             indicatorColor = SpotSub
                         )
                 )

@@ -1,4 +1,4 @@
-package com.devocean.feature.mypage.navigation
+package com.devocean.feature.chat.chatlist.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -6,25 +6,25 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.devocean.core.navigation.Route
-import com.devocean.feature.mypage.MyPageRoute
+import com.devocean.feature.chat.chatlist.ChatListRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateMyPage(navOptions: NavOptions? = null) {
+fun NavController.navigateChatList(navOptions: NavOptions? = null) {
     navigate(
-        route = MyPage,
+        route = ChatList,
         navOptions = navOptions
     )
 }
 
-fun NavGraphBuilder.myPageNavGraph(
+fun NavGraphBuilder.chatListNavGraph(
     navHostController: NavHostController,
 ) {
-    composable<MyPage> {
-        MyPageRoute(
+    composable<ChatList> {
+        ChatListRoute(
             onBackClick = { navHostController.navigateUp() }
         )
     }
 }
 
 @Serializable
-data object MyPage : Route
+data object ChatList : Route

@@ -21,6 +21,8 @@ fun ImageButton(
     paddingVertical: Dp,
     onButtonClick: () -> Unit,
     painterResource: Int,
+    containerColor: Color,
+    contentColor: Color,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
 ) {
@@ -33,11 +35,11 @@ fun ImageButton(
             interactionSource = interactionSource,
             enabled = isEnabled,
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFF9623E),
-                contentColor = Color.Black
+                containerColor = containerColor,
+                contentColor = contentColor
             ),
             shape = CircleShape,
-            onClick = { onButtonClick() }
+            onClick = onButtonClick
         ) {
             Image(
                 painter = painterResource(id = painterResource),

@@ -1,4 +1,4 @@
-package com.devocean.feature.bookmark.navigation
+package com.devocean.feature.chat.chat.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -6,25 +6,26 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.devocean.core.navigation.MainTabRoute
-import com.devocean.feature.bookmark.BookmarkRoute
+import com.devocean.feature.chat.chat.ChatRoute
+import com.devocean.feature.chat.chatlist.navigation.navigateChatList
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateBookmark(navOptions: NavOptions? = null) {
+fun NavController.navigateChat(navOptions: NavOptions? = null) {
     navigate(
-        route = Bookmark,
+        route = Chat,
         navOptions = navOptions
     )
 }
 
-fun NavGraphBuilder.bookmarkNavGraph(
+fun NavGraphBuilder.chatNavGraph(
     navHostController: NavHostController,
 ) {
-    composable<Bookmark> {
-        BookmarkRoute(
-            navigateUp = { navHostController.navigateUp() }
+    composable<Chat> {
+        ChatRoute(
+            navigateToChatList = { navHostController.navigateChatList() }
         )
     }
 }
 
 @Serializable
-data object Bookmark : MainTabRoute
+data object Chat : MainTabRoute
