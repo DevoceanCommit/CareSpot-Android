@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.devocean.feature.chat.navigation.navigateBookmark
+import com.devocean.feature.chat.chat.navigation.navigateChat
 import com.devocean.feature.home.navigation.Home
 import com.devocean.feature.home.navigation.navigateHome
 
@@ -38,7 +38,7 @@ class MainNavigator(
 
         when (tab) {
             MainTab.HOME -> navController.navigateHome(navOptions)
-            MainTab.CHAT -> navController.navigateBookmark(navOptions)
+            MainTab.CHAT -> navController.navigateChat(navOptions)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.devocean.feature.chat
+package com.devocean.feature.chat.chat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,14 +21,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
-import com.devocean.feature.chat.component.ChatLIstItem
-import com.devocean.feature.chat.component.ChatTopBar
+import com.devocean.feature.chat.chat.component.ChatLIstItem
+import com.devocean.feature.chat.chat.component.ChatTopBar
 import com.devocean.feature.home.YouTubeData
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun ChatRoute(
-    navigateUp: () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
 
@@ -95,7 +94,6 @@ fun ChatScreen(
 @Composable
 fun ChatScreenPreview() {
     DevoceanSpotTheme {
-
         val mockDataList = listOf(
             YouTubeData(
                 title = "데보션 영 3기 생생한 발대식 현장",

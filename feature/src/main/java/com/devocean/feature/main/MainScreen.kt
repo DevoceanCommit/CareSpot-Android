@@ -26,9 +26,9 @@ import com.devocean.core.designsystem.theme.Gray400
 import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.util.NoRippleInteractionSource
-import com.devocean.feature.chat.navigation.chatNavGraph
+import com.devocean.feature.chat.chat.navigation.chatNavGraph
+import com.devocean.feature.chat.chatlist.navigation.chatListNavGraph
 import com.devocean.feature.home.navigation.homeNavGraph
-import com.devocean.feature.mypage.navigation.myPageNavGraph
 
 @Composable
 fun MainScreen(
@@ -56,7 +56,7 @@ fun MainScreen(
             ) {
                 homeNavGraph(navHostController = navigator.navController)
                 chatNavGraph(navHostController = navigator.navController)
-                myPageNavGraph(navHostController = navigator.navController)
+                chatListNavGraph(navHostController = navigator.navController)
             }
         }
     }

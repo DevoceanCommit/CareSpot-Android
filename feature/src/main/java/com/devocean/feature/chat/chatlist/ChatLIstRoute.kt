@@ -1,4 +1,4 @@
-package com.devocean.feature.mypage
+package com.devocean.feature.chat.chatlist
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,15 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devocean.core.designsystem.component.button.TextButton
+import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.R
-import com.devocean.feature.mypage.component.MyPageTopBar
+import com.devocean.feature.chat.chatlist.component.MyPageTopBar
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun MyPageRoute(
+fun ChatListRoute(
     onBackClick: () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
@@ -34,13 +36,13 @@ fun MyPageRoute(
         )
     }
 
-    MyPageScreen(
+    ChatListScreen(
         onBackClick = { onBackClick() }
     )
 }
 
 @Composable
-fun MyPageScreen(
+fun ChatListScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit = {},
 ) {
@@ -104,5 +106,13 @@ fun MyPageScreen(
         Spacer(modifier = modifier.weight(1f))
         Divider(thickness = 2.dp, color = SpotGray)
         Spacer(modifier = modifier.weight(2f))
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ChatListScreenPreview(){
+    DevoceanSpotTheme {
+        ChatListScreen()
     }
 }

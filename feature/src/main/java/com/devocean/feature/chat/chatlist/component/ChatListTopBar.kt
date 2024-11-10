@@ -1,4 +1,4 @@
-package com.devocean.feature.mypage.component
+package com.devocean.feature.chat.chatlist.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth

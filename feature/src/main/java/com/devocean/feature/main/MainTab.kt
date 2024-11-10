@@ -5,7 +5,7 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import com.devocean.core.navigation.MainTabRoute
 import com.devocean.feature.R
-import com.devocean.feature.chat.navigation.Chat
+import com.devocean.feature.chat.chat.navigation.Chat
 import com.devocean.feature.home.navigation.Home
 
 enum class MainTab(
