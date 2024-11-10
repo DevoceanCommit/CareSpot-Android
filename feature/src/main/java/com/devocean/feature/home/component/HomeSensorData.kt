@@ -12,10 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
+import com.devocean.core.designsystem.theme.Gray400
+import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 
@@ -83,7 +86,7 @@ private fun SensorDataItem(
         Text(
             text = data.toString(),
             fontWeight = FontWeight.Bold,
-            color = SpotMain
+            color = Gray400
         )
     }
 }

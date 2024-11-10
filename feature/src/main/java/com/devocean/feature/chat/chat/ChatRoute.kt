@@ -28,6 +28,7 @@ import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.feature.chat.chat.component.ChatLIstItem
 import com.devocean.feature.chat.chat.component.ChatTopBar
+import com.devocean.feature.chat.chat.model.ChatListModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -48,20 +49,20 @@ fun ChatRoute(
         viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                  is ChatSideEffect.NavigateToChatList->{
-                      navigateToChatList()
-                  }
+                    is ChatSideEffect.NavigateToChatList -> {
+                        navigateToChatList()
+                    }
                 }
             }
     }
 
     val mockDataList = listOf(
-        YouTubeData(
+        ChatListModel(
             title = "데보션 영 3기 생생한 발대식 현장",
             date = "2024-11-10 15:11",
             summary = "한줄요약"
         ),
-        YouTubeData(
+        ChatListModel(
             title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
             date = "2024-11-10 15:11",
             summary = "한줄요약"
@@ -76,7 +77,7 @@ fun ChatRoute(
 
 @Composable
 fun ChatScreen(
-    dataList: List<YouTubeData>,
+    dataList: List<ChatListModel>,
     onCLick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -116,12 +117,12 @@ fun ChatScreen(
 fun ChatScreenPreview() {
     DevoceanSpotTheme {
         val mockDataList = listOf(
-            YouTubeData(
+            ChatListModel(
                 title = "데보션 영 3기 생생한 발대식 현장",
                 date = "2024-11-10 15:11",
                 summary = "한줄요약"
             ),
-            YouTubeData(
+            ChatListModel(
                 title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
                 date = "2024-11-10 15:11",
                 summary = "한줄요약"
