@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -45,6 +44,10 @@ fun ChatRoute(
         )
     }
 
+    LaunchedEffect(true) {
+
+    }
+
     LaunchedEffect(viewModel.sideEffects, lifecycleOwner) {
         viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
@@ -58,12 +61,10 @@ fun ChatRoute(
 
     val mockDataList = listOf(
         ChatListModel(
-            title = "생생한 발대식 현장",
             date = "2024-11-10 15:11",
             summary = "한줄요약"
         ),
         ChatListModel(
-            title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
             date = "2024-11-10 15:11",
             summary = "한줄요약"
         )
@@ -83,7 +84,7 @@ fun ChatScreen(
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(Color.White)
     ) {
         ChatTopBar()
@@ -101,9 +102,8 @@ fun ChatScreen(
                     modifier = Modifier.padding(horizontal = 20.dp)
                 ) {
                     ChatListItem(
-                        title = item.title,
-                        date = item.date,
                         summary = item.summary,
+                        date = item.date,
                         modifier = Modifier.clickable { onCLick() }
                     )
                 }
@@ -118,14 +118,12 @@ fun ChatScreenPreview() {
     DevoceanSpotTheme {
         val mockDataList = listOf(
             ChatListModel(
-                title = "생생한 발대식 현장",
+                summary = "한줄요약",
                 date = "2024-11-10 15:11",
-                summary = "한줄요약"
             ),
             ChatListModel(
-                title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
-                date = "2024-11-10 15:11",
-                summary = "한줄요약"
+                summary = "한줄요약",
+                date = "2024-11-10 15:11"
             )
         )
         ChatScreen(
