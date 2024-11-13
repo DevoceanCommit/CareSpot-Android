@@ -18,6 +18,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,6 +26,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
+import com.devocean.core.extension.toast
 import com.devocean.feature.chat.chat.component.ChatListItem
 import com.devocean.feature.chat.chat.component.ChatTopBar
 import com.devocean.feature.chat.chat.model.ChatListModel
@@ -37,6 +39,8 @@ fun ChatRoute(
 ) {
     val systemUiController = rememberSystemUiController()
     val lifecycleOwner = LocalLifecycleOwner.current
+
+    val context = LocalContext.current
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -52,9 +56,10 @@ fun ChatRoute(
         viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                    is ChatSideEffect.NavigateToChatList -> {
-                        navigateToChatList()
-                    }
+                    is ChatSideEffect.NavigateToChatList -> navigateToChatList()
+
+                    is ChatSideEffect.ShowToast -> context.toast(sideEffect.message)
+
                 }
             }
     }

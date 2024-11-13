@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Spot Call</string>
 
+    <string name="server_success">서버통신에 성공했어요</string>
+    <string name="server_failure">서버통신에 실패했어요</string>
+
     <string name="home_top_bar_title">Care App</string>
     <string name="home_latest_title">최근 챗봇 이력</string>
     <string name="home_sensor_title">센서 데이터 확인</string>
