@@ -45,7 +45,7 @@ fun ChatRoute(
     }
 
     LaunchedEffect(true) {
-
+        viewModel.getChatList()
     }
 
     LaunchedEffect(viewModel.sideEffects, lifecycleOwner) {
