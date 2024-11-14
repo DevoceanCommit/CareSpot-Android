@@ -79,6 +79,9 @@ lifecycleRuntimeComposeAndroid = "2.8.2"
 # UI
 uiTooling = "1.6.8"
 
+# immutable
+kotlinx-collections-immutable = "0.3.8"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
@@ -156,6 +159,8 @@ ossLicense = {group = "com.google.android.gms", name = "play-services-oss-licens
 lottie = {group = "com.airbnb.android", name = "lottie", version.ref = "lottieVersion"}
 
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
+
+kotlin-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

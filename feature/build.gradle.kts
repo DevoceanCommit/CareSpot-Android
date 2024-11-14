@@ -85,4 +85,6 @@ dependencies {
     implementation(libs.ossLicense)
     implementation(libs.lottie)
     implementation(libs.accompanist.systemuicontroller)
+
+    implementation(libs.kotlin.collections.immutable)
 }
