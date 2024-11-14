@@ -1,7 +1,7 @@
 package com.devocean.domain.entity.chat
 
 data class ChatList(
-    val sessionId: Int,
-    val createdAt: String,
-    val summary: String
+    val summary: String,
+    val updated_at: String,
+    val id: Int
 )

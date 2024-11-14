@@ -9,6 +9,6 @@ class ChatDataSourceImpl @Inject constructor(
     private val service: ChatService
 ) : ChatDataSource {
 
-    override suspend fun getChatList(): ChatResponseDto = service.getChatList()
+    override suspend fun getChatList(): List<ChatResponseDto> = service.getChatList()
 
 }

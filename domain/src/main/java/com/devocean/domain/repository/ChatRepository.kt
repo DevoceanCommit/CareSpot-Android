@@ -4,6 +4,6 @@ import com.devocean.domain.entity.chat.ChatList
 
 interface ChatRepository {
 
-    suspend fun getChatList() : Result<ChatList>
+    suspend fun getChatList() : Result<List<ChatList>>
 
 }

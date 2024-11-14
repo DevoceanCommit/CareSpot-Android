@@ -10,7 +10,7 @@ class ChatRepositoryImpl @Inject constructor(
     private val dataSource: ChatDataSource
 ) : ChatRepository {
 
-    override suspend fun getChatList(): Result<ChatList> =
+    override suspend fun getChatList(): Result<List<ChatList>> =
         runCatching {
             dataSource.getChatList().toChatList()
         }

@@ -6,6 +6,6 @@ import retrofit2.http.GET
 interface ChatService {
 
     @GET("/api/chat/list")
-    suspend fun getChatList(): ChatResponseDto
+    suspend fun getChatList(): List<ChatResponseDto>
 
 }

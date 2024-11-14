@@ -4,6 +4,6 @@ import com.devocean.data.dto.response.ChatResponseDto
 
 interface ChatDataSource {
 
-    suspend fun getChatList(): ChatResponseDto
+    suspend fun getChatList(): List<ChatResponseDto>
 
 }
