@@ -49,7 +49,6 @@ object RetrofitModule {
                 val jsonArray = org.json.JSONArray(message)
                 Timber.tag("okhttp").d(jsonArray.toString(4))
             }
-           //     Timber.tag("okhttp").d(JSONObject(message).toString(4))
 
             else -> {
                 Timber.tag("okhttp").d("CONNECTION INFO -> $message")
