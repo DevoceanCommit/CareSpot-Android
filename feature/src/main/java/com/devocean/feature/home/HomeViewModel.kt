@@ -41,4 +41,8 @@ class HomeViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getSensor(){
+        repository
+    }
 }

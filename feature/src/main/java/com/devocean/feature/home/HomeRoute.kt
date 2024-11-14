@@ -51,6 +51,7 @@ fun HomeRoute(
 
     LaunchedEffect(true) {
         viewModel.getLatestChat()
+        viewModel.getSensor()
     }
 
     LaunchedEffect(viewModel.sideEffect, lifecycleOwner) {
