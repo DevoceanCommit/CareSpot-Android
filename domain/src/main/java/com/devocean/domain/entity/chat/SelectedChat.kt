@@ -1,4 +1,4 @@
-package com.devocean.domain.entity.selectedchat
+package com.devocean.domain.entity.chat
 
 data class SelectedChat(
     val type: String,

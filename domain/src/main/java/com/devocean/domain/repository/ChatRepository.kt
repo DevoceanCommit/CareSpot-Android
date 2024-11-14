@@ -1,8 +1,8 @@
 package com.devocean.domain.repository
 
 import com.devocean.domain.entity.chat.ChatList
-import com.devocean.domain.entity.selectedchat.SelectedChat
-import com.devocean.domain.entity.selectedchat.SummaryReport
+import com.devocean.domain.entity.chat.SelectedChat
+import com.devocean.domain.entity.chat.SummaryReport
 
 interface ChatRepository {
     suspend fun getChatList(): Result<List<ChatList>>

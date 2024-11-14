@@ -26,11 +26,10 @@ fun HomeSensorData(
     modifier: Modifier = Modifier
 ) {
     val sensorDataItems = listOf(
-        "움직임" to 4.2f,
-        "응급상황 발생 여부" to 4.2f,
-        "온습도 현황" to 4.2f,
+        "온도" to 4.2f,
+        "움직임 정도" to 4.2f,
         "소음 정도" to 4.2f,
-        "공기질" to 4.2f
+        "습도" to 4.2f,
     )
 
     Column(modifier = modifier) {

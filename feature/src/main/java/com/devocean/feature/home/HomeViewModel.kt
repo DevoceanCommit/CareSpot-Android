@@ -43,6 +43,14 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getSensor() {
-        repository
+        viewModelScope.launch {
+            repository.getSensor()
+                .onSuccess {
+                    _sideEffect.emit(HomeSideEffect.ShowToast(R.string.server_success))
+                }
+                .onFailure {
+                    _sideEffect.emit(HomeSideEffect.ShowToast(R.string.server_failure))
+                }
+        }
     }
 }

@@ -13,8 +13,10 @@ data class ChatResponseDto(
     val summary: String,
     @SerialName("updated_at")
     val updatedAt: String,
-    @SerialName("type")
-    val type: String?,
     @SerialName("id")
     val id: Int,
+    @SerialName("type")
+    val type: String?,
+    @SerialName("timestamp")
+    val timestamp: String,
 )
