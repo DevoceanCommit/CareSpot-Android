@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
@@ -41,6 +42,8 @@ fun ChatRoute(
     val lifecycleOwner = LocalLifecycleOwner.current
 
     val context = LocalContext.current
+
+    val state = viewModel.state.collectAsStateWithLifecycle()
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -64,21 +67,8 @@ fun ChatRoute(
             }
     }
 
-    val mockDataList = listOf(
-        ChatListModel(
-            date = "2024-11-10 15:11",
-            summary = "한줄요약",
-            id = 1
-        ),
-        ChatListModel(
-            date = "2024-11-10 15:11",
-            summary = "한줄요약",
-            id = 2
-        )
-    )
-
     ChatScreen(
-        dataList = mockDataList,
+        dataList = state.value.chatList,
         onCLick = viewModel::navigateToChatList
     )
 }
