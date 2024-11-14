@@ -1,4 +1,4 @@
-package com.devocean.feature.chat.chatlist
+package com.devocean.feature.chat.selectedchat
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatListViewModel @Inject constructor(
+class SelectedChatViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _action: MutableStateFlow<Boolean> = MutableStateFlow(false)

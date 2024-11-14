@@ -1,4 +1,4 @@
-package com.devocean.feature.chat.chatlist.component
+package com.devocean.feature.chat.selectedchat.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

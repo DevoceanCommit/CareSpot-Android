@@ -1,4 +1,4 @@
-package com.devocean.feature.chat.chatlist
+package com.devocean.feature.chat.selectedchat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -16,37 +16,37 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.devocean.core.designsystem.component.button.ImageButton
+import com.devocean.core.designsystem.component.item.ChatBotChatItem
+import com.devocean.core.designsystem.component.item.MyChatItem
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.feature.R
-import com.devocean.core.designsystem.component.item.ChatBotChatItem
-import com.devocean.core.designsystem.component.item.MyChatItem
-import com.devocean.feature.chat.chatlist.component.MyPageTopBar
-import com.devocean.feature.chat.chatlist.component.SummaryDialog
+import com.devocean.feature.chat.selectedchat.component.SelectedChatTopBar
+import com.devocean.feature.chat.selectedchat.component.SummaryDialog
 
 @Composable
-fun ChatListRoute(
+fun SelectedChatRoute(
     onBackClick: () -> Unit,
-    viewModel: ChatListViewModel = hiltViewModel()
+    viewModel: SelectedChatViewModel = hiltViewModel()
 ) {
 
     val action by viewModel.action.collectAsStateWithLifecycle()
 
-    if (action == true) {
+    if (action) {
         SummaryDialog(
             onDismissRequest = { viewModel.updateSummaryDialog(false) },
             text = "이것은 한 줄 요약입니다."
         )
     }
 
-    ChatListScreen(
+    SelectedChatScreen(
         onBackClick = onBackClick,
         onDialogClick = { viewModel.updateSummaryDialog(true) }
     )
 }
 
 @Composable
-fun ChatListScreen(
+fun SelectedChatScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onDialogClick: () -> Unit
@@ -56,7 +56,7 @@ fun ChatListScreen(
             .fillMaxWidth()
             .background(Color.White)
     ) {
-        MyPageTopBar(onBackClick = onBackClick)
+        SelectedChatTopBar(onBackClick = onBackClick)
         MyChatItem(
             text = "오늘 날씨는 어떤가요?",
             modifier = Modifier
@@ -83,7 +83,7 @@ fun ChatListScreen(
 @Composable
 fun ChatListScreenPreview() {
     DevoceanSpotTheme {
-        ChatListScreen(
+        SelectedChatScreen(
             onDialogClick = {},
             onBackClick = {}
         )

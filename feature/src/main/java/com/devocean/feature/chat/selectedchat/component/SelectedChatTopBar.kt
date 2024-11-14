@@ -1,4 +1,4 @@
-package com.devocean.feature.chat.chatlist.component
+package com.devocean.feature.chat.selectedchat.component
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +14,7 @@ import com.devocean.core.extension.noRippleClickable
 import com.devocean.feature.R
 
 @Composable
-fun MyPageTopBar(
+fun SelectedChatTopBar(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
 ) {

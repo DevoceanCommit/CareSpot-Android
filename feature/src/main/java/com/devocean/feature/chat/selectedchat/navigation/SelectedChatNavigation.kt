@@ -1,4 +1,4 @@
-package com.devocean.feature.chat.chatlist.navigation
+package com.devocean.feature.chat.selectedchat.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -6,21 +6,21 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.devocean.core.navigation.Route
-import com.devocean.feature.chat.chatlist.ChatListRoute
+import com.devocean.feature.chat.selectedchat.SelectedChatRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateChatList(navOptions: NavOptions? = null) {
+fun NavController.navigateSelectedChat(navOptions: NavOptions? = null) {
     navigate(
         route = ChatList,
         navOptions = navOptions
     )
 }
 
-fun NavGraphBuilder.chatListNavGraph(
+fun NavGraphBuilder.selectedChatNavGraph(
     navHostController: NavHostController,
 ) {
     composable<ChatList> {
-        ChatListRoute(
+        SelectedChatRoute(
             onBackClick = { navHostController.navigateUp() }
         )
     }
