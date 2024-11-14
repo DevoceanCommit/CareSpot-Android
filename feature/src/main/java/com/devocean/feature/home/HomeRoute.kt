@@ -12,6 +12,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -41,7 +42,7 @@ fun HomeRoute(
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
 
-    val state = viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -64,12 +65,20 @@ fun HomeRoute(
     }
 
     HomeScreen(
-        latestChat = state.value.latestChat
+        temperature = state.temperature,
+        movement = state.movement,
+        sound = state.sound,
+        humidity = state.humidity,
+        latestChat = state.latestChat
     )
 }
 
 @Composable
 fun HomeScreen(
+    temperature: Int,
+    movement: String,
+    sound: Int,
+    humidity: Int,
     latestChat: PersistentList<LatestChatListModel>,
     modifier: Modifier = Modifier,
 ) {
@@ -85,7 +94,12 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(20.dp))
         HomeProfile(modifier = Modifier.padding(start = 10.dp))
         Spacer(modifier = Modifier.height(20.dp))
-        HomeSensorData()
+        HomeSensorData(
+            temperature = temperature,
+            movement = movement,
+            sound = sound,
+            humidity = humidity
+        )
         Spacer(modifier = Modifier.height(10.dp))
         HomeLatestData(
             chatList = latestChat,
@@ -99,6 +113,10 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     DevoceanSpotTheme {
         HomeScreen(
+            temperature = 4,
+            movement = "움직임",
+            sound = 5,
+            humidity = 6,
             latestChat = persistentListOf()
         )
     }

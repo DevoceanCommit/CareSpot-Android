@@ -20,7 +20,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: HomeRepository
 ) : ViewModel() {
-
     private val _state: MutableStateFlow<HomeState> = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState> = _state.asStateFlow()
 
@@ -45,8 +44,15 @@ class HomeViewModel @Inject constructor(
     fun getSensor() {
         viewModelScope.launch {
             repository.getSensor()
-                .onSuccess {
-                    _sideEffect.emit(HomeSideEffect.ShowToast(R.string.server_success))
+                .onSuccess { data ->
+                    _state.update { currentState ->
+                        currentState.copy(
+                            temperature = data.temperatureIn,
+                            movement = data.movement,
+                            sound = data.soundIn,
+                            humidity = data.humidityIn,
+                        )
+                    }
                 }
                 .onFailure {
                     _sideEffect.emit(HomeSideEffect.ShowToast(R.string.server_failure))
