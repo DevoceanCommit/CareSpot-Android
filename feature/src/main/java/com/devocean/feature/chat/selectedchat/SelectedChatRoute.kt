@@ -2,10 +2,11 @@ package com.devocean.feature.chat.selectedchat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,15 +20,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
-import com.devocean.core.designsystem.component.button.ImageButton
 import com.devocean.core.designsystem.component.item.ChatBotChatItem
 import com.devocean.core.designsystem.component.item.MyChatItem
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
-import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.extension.toast
-import com.devocean.feature.R
 import com.devocean.feature.chat.selectedchat.component.SelectedChatTopBar
 import com.devocean.feature.chat.selectedchat.component.SummaryDialog
+import com.devocean.feature.chat.selectedchat.model.SelectedChatModel
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun SelectedChatRoute(
@@ -39,6 +40,7 @@ fun SelectedChatRoute(
     val context = LocalContext.current
 
     val action by viewModel.action.collectAsStateWithLifecycle()
+    val state = viewModel.state.collectAsStateWithLifecycle()
 
     if (action) {
         SummaryDialog(
@@ -62,6 +64,7 @@ fun SelectedChatRoute(
     }
 
     SelectedChatScreen(
+        selectedChat = state.value.chat,
         onBackClick = onBackClick,
         onDialogClick = { viewModel.updateSummaryDialog(true) }
     )
@@ -69,37 +72,54 @@ fun SelectedChatRoute(
 
 @Composable
 fun SelectedChatScreen(
+    selectedChat: PersistentList<SelectedChatModel>,
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
     onDialogClick: () -> Unit
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(Color.White)
     ) {
-        SelectedChatTopBar(onBackClick = onBackClick)
-        MyChatItem(
-            text = "오늘 날씨는 어떤가요?",
-            modifier = Modifier
-                .align(Alignment.End)
+        SelectedChatTopBar(
+            onBackClick = onBackClick,
+            onDialogClick = onDialogClick
         )
-        Spacer(modifier = Modifier.height(10.dp))
-        ChatBotChatItem(text = "오늘은 맑고 온도는 25도입니다.")
-        Spacer(modifier = Modifier.weight(5f))
-        ImageButton(
-            paddingVertical = 10.dp,
-            onButtonClick = onDialogClick,
-            painterResource = R.drawable.ic_notes_24,
-            containerColor = SpotSub,
-            contentColor = Color.White,
-            modifier = Modifier
-                .align(Alignment.End)
-                .padding(end = 20.dp)
-        )
-        Spacer(modifier = Modifier.weight(1f))
+        LazyColumn(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            items(selectedChat) { item ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp, vertical = 5.dp)
+                        .padding(bottom = 10.dp)
+                ) {
+                    when (item.type) {
+                        AI -> {
+                            ChatBotChatItem(
+                                text = item.content,
+                                modifier = Modifier.align(Alignment.Start)
+                            )
+                        }
+
+                        USER -> {
+                            MyChatItem(
+                                text = item.content,
+                                modifier = Modifier.align(Alignment.End)
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
+private const val AI = "ai"
+private const val USER = "user"
 
 @Preview(showBackground = true)
 @Composable
@@ -107,7 +127,8 @@ fun ChatListScreenPreview() {
     DevoceanSpotTheme {
         SelectedChatScreen(
             onDialogClick = {},
-            onBackClick = {}
+            onBackClick = {},
+            selectedChat = persistentListOf()
         )
     }
 }

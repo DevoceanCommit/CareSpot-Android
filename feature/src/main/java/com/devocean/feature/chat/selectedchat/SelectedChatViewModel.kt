@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devocean.domain.repository.ChatRepository
 import com.devocean.feature.R
-import com.devocean.feature.chat.chat.ChatSideEffect
+import com.devocean.feature.chat.selectedchat.model.toModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -24,6 +25,9 @@ class SelectedChatViewModel @Inject constructor(
     private val _action: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val action: StateFlow<Boolean> = _action.asStateFlow()
 
+    private val _state: MutableStateFlow<SelectedChatState> = MutableStateFlow(SelectedChatState())
+    val state: StateFlow<SelectedChatState> = _state.asStateFlow()
+
     private val _sideEffect = MutableSharedFlow<SelectedChatSideEffect>()
     val sideEffect: SharedFlow<SelectedChatSideEffect> = _sideEffect.asSharedFlow()
 
@@ -34,8 +38,10 @@ class SelectedChatViewModel @Inject constructor(
     fun getSelectedChat(sessionId: Int) {
         viewModelScope.launch {
             repository.getSelectedChat(sessionId)
-                .onSuccess {
-                    _sideEffect.emit(SelectedChatSideEffect.ShowToast(R.string.server_success))
+                .onSuccess { chat ->
+                    _state.update { currentState ->
+                        currentState.copy(chat = chat.map { it.toModel() }.toPersistentList())
+                    }
                 }
                 .onFailure {
                     _sideEffect.emit(SelectedChatSideEffect.ShowToast(R.string.server_failure))
