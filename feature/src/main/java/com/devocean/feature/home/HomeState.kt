@@ -1,6 +1,9 @@
 package com.devocean.feature.home
 
+import com.devocean.feature.home.model.LatestChatListModel
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 data class HomeState(
-    val search: String = "",
+    val latestChat: PersistentList<LatestChatListModel> = persistentListOf()
 )

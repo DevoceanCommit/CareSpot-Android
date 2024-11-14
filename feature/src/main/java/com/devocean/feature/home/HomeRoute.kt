@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -25,12 +24,14 @@ import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
 import com.devocean.core.extension.toast
-import com.devocean.feature.chat.chat.ChatSideEffect
 import com.devocean.feature.home.component.HomeLatestData
 import com.devocean.feature.home.component.HomeProfile
 import com.devocean.feature.home.component.HomeSensorData
 import com.devocean.feature.home.component.HomeTopBar
+import com.devocean.feature.home.model.LatestChatListModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun HomeRoute(
@@ -61,11 +62,14 @@ fun HomeRoute(
             }
     }
 
-    HomeScreen()
+    HomeScreen(
+        latestChat = state.value.latestChat
+    )
 }
 
 @Composable
 fun HomeScreen(
+    latestChat: PersistentList<LatestChatListModel>,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -82,7 +86,10 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(20.dp))
         HomeSensorData()
         Spacer(modifier = Modifier.height(10.dp))
-        HomeLatestData(modifier = Modifier.height(290.dp))
+        HomeLatestData(
+            chatList = latestChat,
+            modifier = Modifier.height(290.dp)
+        )
     }
 }
 
@@ -90,6 +97,8 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     DevoceanSpotTheme {
-        HomeScreen()
+        HomeScreen(
+            latestChat = persistentListOf()
+        )
     }
 }
