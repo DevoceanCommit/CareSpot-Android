@@ -22,7 +22,7 @@ fun NavGraphBuilder.chatNavGraph(
 ) {
     composable<Chat> {
         ChatRoute(
-            navigateToChatList = { navHostController.navigateSelectedChat() }
+            navigateToSelectedChat = { navHostController.navigateSelectedChat(id = it) }
         )
     }
 }

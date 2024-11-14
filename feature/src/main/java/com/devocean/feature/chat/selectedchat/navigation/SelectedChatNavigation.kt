@@ -5,13 +5,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.devocean.core.navigation.Route
 import com.devocean.feature.chat.selectedchat.SelectedChatRoute
 import kotlinx.serialization.Serializable
 
-fun NavController.navigateSelectedChat(navOptions: NavOptions? = null) {
+fun NavController.navigateSelectedChat(
+    id: Int,
+    navOptions: NavOptions? = null
+) {
     navigate(
-        route = ChatList,
+        route = SelectedChat(id = id),
         navOptions = navOptions
     )
 }
@@ -19,12 +23,16 @@ fun NavController.navigateSelectedChat(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.selectedChatNavGraph(
     navHostController: NavHostController,
 ) {
-    composable<ChatList> {
+    composable<SelectedChat> {
+        val args = it.toRoute<SelectedChat>()
         SelectedChatRoute(
+            id = args.id,
             onBackClick = { navHostController.navigateUp() }
         )
     }
 }
 
 @Serializable
-data object ChatList : Route
+data class SelectedChat(
+    val id: Int
+) : Route

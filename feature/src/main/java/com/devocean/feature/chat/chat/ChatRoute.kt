@@ -36,7 +36,7 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun ChatRoute(
-    navigateToChatList: () -> Unit,
+    navigateToSelectedChat: (Int) -> Unit,
     viewModel: ChatViewModel = hiltViewModel(),
 ) {
     val systemUiController = rememberSystemUiController()
@@ -59,7 +59,7 @@ fun ChatRoute(
         viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                    is ChatSideEffect.NavigateToChatList -> navigateToChatList()
+                    is ChatSideEffect.NavigateToChatList -> navigateToSelectedChat(sideEffect.id)
 
                     is ChatSideEffect.ShowToast -> context.toast(sideEffect.message)
 
@@ -69,14 +69,14 @@ fun ChatRoute(
 
     ChatScreen(
         dataList = state.value.chatList,
-        onCLick = viewModel::navigateToChatList
+        onCLick = { viewModel.navigateToChatList(id = it) }
     )
 }
 
 @Composable
 fun ChatScreen(
     dataList: List<ChatListModel>,
-    onCLick: () -> Unit,
+    onCLick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -101,7 +101,7 @@ fun ChatScreen(
                     ChatListItem(
                         summary = item.summary,
                         date = item.date,
-                        modifier = Modifier.clickable { onCLick() }
+                        modifier = Modifier.clickable { onCLick(item.id) }
                     )
                 }
             }

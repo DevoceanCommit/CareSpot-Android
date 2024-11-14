@@ -28,8 +28,8 @@ class ChatViewModel @Inject constructor(
     private val _sideEffects = MutableSharedFlow<ChatSideEffect>()
     val sideEffects: SharedFlow<ChatSideEffect> = _sideEffects.asSharedFlow()
 
-    fun navigateToChatList() =
-        viewModelScope.launch { _sideEffects.emit(ChatSideEffect.NavigateToChatList) }
+    fun navigateToChatList(id: Int) =
+        viewModelScope.launch { _sideEffects.emit(ChatSideEffect.NavigateToChatList(id)) }
 
     fun getChatList() {
         viewModelScope.launch {

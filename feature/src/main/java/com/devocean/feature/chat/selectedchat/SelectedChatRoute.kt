@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +27,7 @@ import com.devocean.feature.chat.selectedchat.component.SummaryDialog
 
 @Composable
 fun SelectedChatRoute(
+    id: Int,
     onBackClick: () -> Unit,
     viewModel: SelectedChatViewModel = hiltViewModel()
 ) {
@@ -37,6 +39,10 @@ fun SelectedChatRoute(
             onDismissRequest = { viewModel.updateSummaryDialog(false) },
             text = "이것은 한 줄 요약입니다."
         )
+    }
+
+    LaunchedEffect(true) {
+        viewModel.getSelectedChat(sessionId = id)
     }
 
     SelectedChatScreen(

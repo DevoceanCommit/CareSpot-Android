@@ -18,4 +18,8 @@ class SelectedChatViewModel @Inject constructor(
     fun updateSummaryDialog(visible: Boolean) {
         _action.update { visible }
     }
+
+    fun getSelectedChat(sessionId: Int){
+
+    }
 }
