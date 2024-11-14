@@ -6,13 +6,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ChatResponseDto(
     @SerialName("created_at")
-    val created_at: String,
+    val createdAt: String,
     @SerialName("user_id")
-    val user_id: Int?,
+    val userId: Int?,
     @SerialName("summary")
     val summary: String,
     @SerialName("updated_at")
-    val updated_at: String,
+    val updatedAt: String,
     @SerialName("type")
     val type: String?,
     @SerialName("id")

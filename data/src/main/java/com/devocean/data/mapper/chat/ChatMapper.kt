@@ -7,7 +7,7 @@ fun List<ChatResponseDto>.toChatList(): List<ChatList> =
     this.map { chatResponseDto ->
         ChatList(
             summary = chatResponseDto.summary,
-            updated_at = chatResponseDto.updated_at,
+            updatedAt = chatResponseDto.updatedAt,
             id = chatResponseDto.id
         )
     }
