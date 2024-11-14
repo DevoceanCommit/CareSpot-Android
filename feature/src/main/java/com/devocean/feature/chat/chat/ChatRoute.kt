@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,17 +18,21 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
+import com.devocean.core.extension.toast
 import com.devocean.feature.chat.chat.component.ChatListItem
 import com.devocean.feature.chat.chat.component.ChatTopBar
 import com.devocean.feature.chat.chat.model.ChatListModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun ChatRoute(
@@ -38,6 +41,9 @@ fun ChatRoute(
 ) {
     val systemUiController = rememberSystemUiController()
     val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
+
+    val state = viewModel.state.collectAsStateWithLifecycle()
 
     SideEffect {
         systemUiController.setStatusBarColor(
@@ -45,32 +51,24 @@ fun ChatRoute(
         )
     }
 
+    LaunchedEffect(true) {
+        viewModel.getChatList()
+    }
+
     LaunchedEffect(viewModel.sideEffects, lifecycleOwner) {
         viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                    is ChatSideEffect.NavigateToChatList -> {
-                        navigateToChatList()
-                    }
+                    is ChatSideEffect.NavigateToChatList -> navigateToChatList()
+
+                    is ChatSideEffect.ShowToast -> context.toast(sideEffect.message)
+
                 }
             }
     }
 
-    val mockDataList = listOf(
-        ChatListModel(
-            title = "생생한 발대식 현장",
-            date = "2024-11-10 15:11",
-            summary = "한줄요약"
-        ),
-        ChatListModel(
-            title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
-            date = "2024-11-10 15:11",
-            summary = "한줄요약"
-        )
-    )
-
     ChatScreen(
-        dataList = mockDataList,
+        dataList = state.value.chatList,
         onCLick = viewModel::navigateToChatList
     )
 }
@@ -83,7 +81,7 @@ fun ChatScreen(
 ) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(Color.White)
     ) {
         ChatTopBar()
@@ -101,9 +99,8 @@ fun ChatScreen(
                     modifier = Modifier.padding(horizontal = 20.dp)
                 ) {
                     ChatListItem(
-                        title = item.title,
-                        date = item.date,
                         summary = item.summary,
+                        date = item.date,
                         modifier = Modifier.clickable { onCLick() }
                     )
                 }
@@ -116,16 +113,16 @@ fun ChatScreen(
 @Composable
 fun ChatScreenPreview() {
     DevoceanSpotTheme {
-        val mockDataList = listOf(
+        val mockDataList = persistentListOf(
             ChatListModel(
-                title = "생생한 발대식 현장",
+                summary = "한줄요약",
                 date = "2024-11-10 15:11",
-                summary = "한줄요약"
+                id = 1
             ),
             ChatListModel(
-                title = "나는 왜 코프링 컨트롤러를 더이상 만들지 않게 되었나?",
+                summary = "한줄요약",
                 date = "2024-11-10 15:11",
-                summary = "한줄요약"
+                id = 2
             )
         )
         ChatScreen(
