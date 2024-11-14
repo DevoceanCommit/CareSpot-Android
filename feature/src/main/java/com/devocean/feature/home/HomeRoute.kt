@@ -11,14 +11,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
+import com.devocean.core.extension.toast
+import com.devocean.feature.chat.chat.ChatSideEffect
 import com.devocean.feature.home.component.HomeLatestData
 import com.devocean.feature.home.component.HomeProfile
 import com.devocean.feature.home.component.HomeSensorData
@@ -30,11 +37,28 @@ fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val systemUiController = rememberSystemUiController()
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
+
+    val state = viewModel.state.collectAsStateWithLifecycle()
 
     SideEffect {
         systemUiController.setStatusBarColor(
             color = Color.White
         )
+    }
+
+    LaunchedEffect(true) {
+        viewModel.getLatestChat()
+    }
+
+    LaunchedEffect(viewModel.sideEffect, lifecycleOwner) {
+        viewModel.sideEffect.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
+            .collect { sideEffect ->
+                when (sideEffect) {
+                    is HomeSideEffect.ShowToast -> context.toast(sideEffect.message)
+                }
+            }
     }
 
     HomeScreen()
