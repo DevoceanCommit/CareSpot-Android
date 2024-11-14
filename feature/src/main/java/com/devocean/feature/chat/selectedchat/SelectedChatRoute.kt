@@ -41,12 +41,12 @@ fun SelectedChatRoute(
     val context = LocalContext.current
 
     val action by viewModel.action.collectAsStateWithLifecycle()
-    val state = viewModel.state.collectAsStateWithLifecycle()
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     if (action) {
         SummaryDialog(
             onDismissRequest = { viewModel.updateSummaryDialog(false) },
-            summary = state.value.summary
+            summary = state.summary
         )
     }
 
@@ -64,7 +64,7 @@ fun SelectedChatRoute(
     }
 
     SelectedChatScreen(
-        selectedChat = state.value.chat,
+        selectedChat = state.chat,
         onBackClick = onBackClick,
         onDialogClick = {
             viewModel.getSummaryReport(sessionId = id)
