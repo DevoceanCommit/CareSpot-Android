@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devocean.domain.repository.ChatRepository
 import com.devocean.feature.R
-import com.devocean.feature.chat.selectedchat.model.toModel
+import com.devocean.feature.chat.selectedchat.model.toSelectedChatModel
+import com.devocean.feature.chat.selectedchat.model.toSummaryReportModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -40,7 +41,25 @@ class SelectedChatViewModel @Inject constructor(
             repository.getSelectedChat(sessionId)
                 .onSuccess { chat ->
                     _state.update { currentState ->
-                        currentState.copy(chat = chat.map { it.toModel() }.toPersistentList())
+                        currentState.copy(chat = chat.map { it.toSelectedChatModel() }
+                            .toPersistentList())
+                    }
+                }
+                .onFailure {
+                    _sideEffect.emit(SelectedChatSideEffect.ShowToast(R.string.server_failure))
+                }
+        }
+    }
+
+    fun getSummaryReport(sessionId: Int) {
+        viewModelScope.launch {
+            repository.getSummaryReport(sessionId)
+                .onSuccess { summary ->
+                    _sideEffect.emit(SelectedChatSideEffect.ShowToast(R.string.server_success))
+
+                    _state.update { currentState ->
+                        currentState.copy(summary = summary.map { it.toSummaryReportModel() }
+                            .toPersistentList())
                     }
                 }
                 .onFailure {

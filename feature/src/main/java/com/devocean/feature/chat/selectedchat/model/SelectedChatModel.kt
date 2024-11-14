@@ -7,7 +7,7 @@ data class SelectedChatModel(
     val content: String
 )
 
-fun SelectedChat.toModel() = SelectedChatModel(
+fun SelectedChat.toSelectedChatModel() = SelectedChatModel(
     type = type,
     content = content
 )

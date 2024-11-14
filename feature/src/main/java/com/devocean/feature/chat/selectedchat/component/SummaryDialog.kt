@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -19,11 +21,14 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotGray
+import com.devocean.feature.chat.selectedchat.model.SummaryReportModel
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun SummaryDialog(
     onDismissRequest: () -> Unit,
-    text: String,
+    summary: PersistentList<SummaryReportModel>,
     modifier: Modifier = Modifier,
     properties: DialogProperties = DialogProperties(
         usePlatformDefaultWidth = false,
@@ -50,7 +55,13 @@ fun SummaryDialog(
             Spacer(modifier = Modifier.height(10.dp))
             HorizontalDivider(thickness = 2.dp, color = SpotGray)
             Spacer(modifier = Modifier.height(10.dp))
-            Text(text = text)
+            LazyColumn(
+                modifier = modifier
+            ) {
+                items(summary) { item ->
+                    Text(text = item.context)
+                }
+            }
         }
     }
 }
@@ -61,7 +72,7 @@ private fun SummaryDialogPreview() {
     DevoceanSpotTheme {
         SummaryDialog(
             onDismissRequest = {},
-            text = "이것은 한 줄 요약입니다."
+            summary = persistentListOf()
         )
     }
 }

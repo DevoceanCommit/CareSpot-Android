@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devocean.domain.repository.HomeRepository
 import com.devocean.feature.R
-import com.devocean.feature.home.model.toModel
-import com.devocean.feature.home.navigation.Home
+import com.devocean.feature.home.model.toListChatModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -33,7 +32,8 @@ class HomeViewModel @Inject constructor(
             repository.getLatestChat()
                 .onSuccess { chat ->
                     _state.update { currentState ->
-                        currentState.copy(latestChat = chat.map { it.toModel() }.toPersistentList())
+                        currentState.copy(latestChat = chat.map { it.toListChatModel() }
+                            .toPersistentList())
                     }
                 }
                 .onFailure {
@@ -42,7 +42,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getSensor(){
+    fun getSensor() {
         repository
     }
 }

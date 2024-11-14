@@ -7,7 +7,7 @@ data class LatestChatListModel(
     val content: String
 )
 
-fun LatestChat.toModel() = LatestChatListModel(
+fun LatestChat.toListChatModel() = LatestChatListModel(
     type = type,
     content = content
 )

@@ -1,4 +1,4 @@
-package com.devocean.data.mapper.selectedchat
+package com.devocean.data.mapper.chat
 
 import com.devocean.data.dto.response.SelectedChatResponseDto
 import com.devocean.domain.entity.selectedchat.SelectedChat

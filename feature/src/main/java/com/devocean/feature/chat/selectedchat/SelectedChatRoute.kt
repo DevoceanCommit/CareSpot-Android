@@ -46,7 +46,7 @@ fun SelectedChatRoute(
     if (action) {
         SummaryDialog(
             onDismissRequest = { viewModel.updateSummaryDialog(false) },
-            text = "이것은 한 줄 요약입니다."
+            summary = state.value.summary
         )
     }
 
@@ -66,7 +66,10 @@ fun SelectedChatRoute(
     SelectedChatScreen(
         selectedChat = state.value.chat,
         onBackClick = onBackClick,
-        onDialogClick = { viewModel.updateSummaryDialog(true) }
+        onDialogClick = {
+            viewModel.getSummaryReport(sessionId = id)
+            viewModel.updateSummaryDialog(true)
+        }
     )
 }
 
