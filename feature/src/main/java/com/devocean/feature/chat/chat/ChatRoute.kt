@@ -32,6 +32,7 @@ import com.devocean.feature.chat.chat.component.ChatListItem
 import com.devocean.feature.chat.chat.component.ChatTopBar
 import com.devocean.feature.chat.chat.model.ChatListModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun ChatRoute(
@@ -40,7 +41,6 @@ fun ChatRoute(
 ) {
     val systemUiController = rememberSystemUiController()
     val lifecycleOwner = LocalLifecycleOwner.current
-
     val context = LocalContext.current
 
     val state = viewModel.state.collectAsStateWithLifecycle()
@@ -113,7 +113,7 @@ fun ChatScreen(
 @Composable
 fun ChatScreenPreview() {
     DevoceanSpotTheme {
-        val mockDataList = listOf(
+        val mockDataList = persistentListOf(
             ChatListModel(
                 summary = "한줄요약",
                 date = "2024-11-10 15:11",
