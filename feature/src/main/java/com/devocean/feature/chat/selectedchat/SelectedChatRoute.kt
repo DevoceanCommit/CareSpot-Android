@@ -12,15 +12,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import com.devocean.core.designsystem.component.button.ImageButton
 import com.devocean.core.designsystem.component.item.ChatBotChatItem
 import com.devocean.core.designsystem.component.item.MyChatItem
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
 import com.devocean.core.designsystem.theme.SpotSub
+import com.devocean.core.extension.toast
 import com.devocean.feature.R
 import com.devocean.feature.chat.selectedchat.component.SelectedChatTopBar
 import com.devocean.feature.chat.selectedchat.component.SummaryDialog
@@ -31,6 +35,8 @@ fun SelectedChatRoute(
     onBackClick: () -> Unit,
     viewModel: SelectedChatViewModel = hiltViewModel()
 ) {
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
 
     val action by viewModel.action.collectAsStateWithLifecycle()
 
@@ -43,6 +49,16 @@ fun SelectedChatRoute(
 
     LaunchedEffect(true) {
         viewModel.getSelectedChat(sessionId = id)
+    }
+
+
+    LaunchedEffect(viewModel.sideEffect, lifecycleOwner) {
+        viewModel.sideEffect.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
+            .collect { sideEffect ->
+                when (sideEffect) {
+                    is SelectedChatSideEffect.ShowToast -> context.toast(sideEffect.message)
+                }
+            }
     }
 
     SelectedChatScreen(
