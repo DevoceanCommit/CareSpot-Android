@@ -67,11 +67,13 @@ fun ChatRoute(
     val mockDataList = listOf(
         ChatListModel(
             date = "2024-11-10 15:11",
-            summary = "한줄요약"
+            summary = "한줄요약",
+            id = 1
         ),
         ChatListModel(
             date = "2024-11-10 15:11",
-            summary = "한줄요약"
+            summary = "한줄요약",
+            id = 2
         )
     )
 
@@ -125,10 +127,12 @@ fun ChatScreenPreview() {
             ChatListModel(
                 summary = "한줄요약",
                 date = "2024-11-10 15:11",
+                id = 1
             ),
             ChatListModel(
                 summary = "한줄요약",
-                date = "2024-11-10 15:11"
+                date = "2024-11-10 15:11",
+                id = 2
             )
         )
         ChatScreen(
