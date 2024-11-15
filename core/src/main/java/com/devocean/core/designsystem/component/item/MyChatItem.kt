@@ -47,7 +47,6 @@ fun MyChatItem(
                 .background(SpotSub)
                 .padding(5.dp),
         )
-        Spacer(modifier = Modifier.width(20.dp))
     }
 }
 

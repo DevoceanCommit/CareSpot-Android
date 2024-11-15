@@ -8,14 +8,12 @@ import androidx.compose.animation.slideOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
@@ -27,7 +25,7 @@ import com.devocean.core.designsystem.theme.SpotMain
 import com.devocean.core.designsystem.theme.SpotSub
 import com.devocean.core.util.NoRippleInteractionSource
 import com.devocean.feature.chat.chat.navigation.chatNavGraph
-import com.devocean.feature.chat.chatlist.navigation.chatListNavGraph
+import com.devocean.feature.chat.selectedchat.navigation.selectedChatNavGraph
 import com.devocean.feature.home.navigation.homeNavGraph
 
 @Composable
@@ -47,16 +45,21 @@ fun MainScreen(
         },
     ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             NavHost(
                 navController = navigator.navController,
                 startDestination = navigator.startDestination
             ) {
-                homeNavGraph(navHostController = navigator.navController)
-                chatNavGraph(navHostController = navigator.navController)
-                chatListNavGraph(navHostController = navigator.navController)
+                homeNavGraph(
+                    paddingValues = innerPadding,
+                    navHostController = navigator.navController
+                )
+                chatNavGraph(
+                    paddingValues = innerPadding,
+                    navHostController = navigator.navController
+                )
+                selectedChatNavGraph(navHostController = navigator.navController)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.devocean.spot.di
 
 import com.devocean.data.service.ChatService
+import com.devocean.data.service.HomeService
 import com.devocean.spot.di.qualifier.JWT
 import dagger.Module
 import dagger.Provides
@@ -17,5 +18,10 @@ object ServiceModule {
     @Singleton
     fun provideChatService(@JWT retrofit: Retrofit): ChatService =
         retrofit.create(ChatService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideHomeService(@JWT retrofit: Retrofit): HomeService =
+        retrofit.create(HomeService::class.java)
 
 }

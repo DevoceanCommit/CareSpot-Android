@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -36,7 +37,8 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun ChatRoute(
-    navigateToChatList: () -> Unit,
+    paddingValues: PaddingValues,
+    navigateToSelectedChat: (Int) -> Unit,
     viewModel: ChatViewModel = hiltViewModel(),
 ) {
     val systemUiController = rememberSystemUiController()
@@ -59,7 +61,7 @@ fun ChatRoute(
         viewModel.sideEffects.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
                 when (sideEffect) {
-                    is ChatSideEffect.NavigateToChatList -> navigateToChatList()
+                    is ChatSideEffect.NavigateToChatList -> navigateToSelectedChat(sideEffect.id)
 
                     is ChatSideEffect.ShowToast -> context.toast(sideEffect.message)
 
@@ -68,21 +70,24 @@ fun ChatRoute(
     }
 
     ChatScreen(
+        paddingValues = paddingValues,
         dataList = state.value.chatList,
-        onCLick = viewModel::navigateToChatList
+        onCLick = { viewModel.navigateToChatList(id = it) }
     )
 }
 
 @Composable
 fun ChatScreen(
     dataList: List<ChatListModel>,
-    onCLick: () -> Unit,
+    onCLick: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(),
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.White)
+            .padding(paddingValues)
     ) {
         ChatTopBar()
         Spacer(modifier = Modifier.height(5.dp))
@@ -101,7 +106,7 @@ fun ChatScreen(
                     ChatListItem(
                         summary = item.summary,
                         date = item.date,
-                        modifier = Modifier.clickable { onCLick() }
+                        modifier = Modifier.clickable { onCLick(item.id) }
                     )
                 }
             }

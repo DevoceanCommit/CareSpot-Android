@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devocean.core.designsystem.theme.DevoceanSpotTheme
@@ -41,7 +42,10 @@ fun HomeProfile(
         Column(
             modifier = Modifier.padding(start = 5.dp)
         ) {
-            Text(text = "김스팟")
+            Text(
+                text = "김스팟",
+                fontWeight = FontWeight.Bold,
+            )
             Text(text = "나이 70세")
             Text(text = "서울 동작구")
         }

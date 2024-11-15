@@ -23,14 +23,17 @@ import com.devocean.feature.R
 
 @Composable
 fun HomeSensorData(
+    temperature: Int,
+    movement: String,
+    sound: Int,
+    humidity: Int,
     modifier: Modifier = Modifier
 ) {
     val sensorDataItems = listOf(
-        "움직임" to 4.2f,
-        "응급상황 발생 여부" to 4.2f,
-        "온습도 현황" to 4.2f,
-        "소음 정도" to 4.2f,
-        "공기질" to 4.2f
+        "온도" to "$temperature °C",
+        "움직임 정도" to movement,
+        "소음 정도" to "$sound db",
+        "습도" to "$humidity %",
     )
 
     Column(modifier = modifier) {
@@ -68,7 +71,7 @@ fun HomeSensorData(
 @Composable
 private fun SensorDataItem(
     text: String,
-    data: Float,
+    data: Any,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -94,6 +97,11 @@ private fun SensorDataItem(
 @Composable
 fun HomeSensorDataPreview() {
     DevoceanSpotTheme {
-        HomeSensorData()
+        HomeSensorData(
+            temperature = 4,
+            movement = "움직임",
+            sound = 5,
+            humidity = 6,
+        )
     }
 }

@@ -1,4 +1,7 @@
 package com.devocean.feature.home
 
-class HomeSideEffect {
+import androidx.annotation.StringRes
+
+sealed class HomeSideEffect {
+    data class ShowToast(@StringRes val message: Int) : HomeSideEffect()
 }
