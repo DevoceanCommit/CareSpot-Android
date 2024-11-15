@@ -2,6 +2,7 @@ package com.devocean.feature.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -36,6 +37,7 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun HomeRoute(
+    paddingValues: PaddingValues,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val systemUiController = rememberSystemUiController()
@@ -65,6 +67,7 @@ fun HomeRoute(
     }
 
     HomeScreen(
+        paddingValues = paddingValues,
         temperature = state.temperature,
         movement = state.movement,
         sound = state.sound,
@@ -81,12 +84,14 @@ fun HomeScreen(
     humidity: Int,
     latestChat: PersistentList<LatestChatListModel>,
     modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(),
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.White)
             .verticalScroll(rememberScrollState())
+            .padding(paddingValues)
     ) {
         HomeTopBar()
         Spacer(modifier = Modifier.height(5.dp))

@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -36,6 +37,7 @@ import kotlinx.collections.immutable.persistentListOf
 
 @Composable
 fun ChatRoute(
+    paddingValues: PaddingValues,
     navigateToSelectedChat: (Int) -> Unit,
     viewModel: ChatViewModel = hiltViewModel(),
 ) {
@@ -68,6 +70,7 @@ fun ChatRoute(
     }
 
     ChatScreen(
+        paddingValues = paddingValues,
         dataList = state.value.chatList,
         onCLick = { viewModel.navigateToChatList(id = it) }
     )
@@ -78,11 +81,13 @@ fun ChatScreen(
     dataList: List<ChatListModel>,
     onCLick: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    paddingValues: PaddingValues = PaddingValues(),
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(Color.White)
+            .padding(paddingValues)
     ) {
         ChatTopBar()
         Spacer(modifier = Modifier.height(5.dp))
