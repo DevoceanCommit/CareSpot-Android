@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,7 +44,7 @@ fun SummaryDialog(
     ) {
         Column(
             modifier = modifier
-                .padding(horizontal = 20.dp)
+                .padding(horizontal = 20.dp, vertical = 60.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(Color.White)
                 .padding(10.dp)
@@ -59,7 +60,13 @@ fun SummaryDialog(
                 modifier = modifier
             ) {
                 items(summary) { item ->
+                    Text(
+                        text = item.subtitle,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(modifier = Modifier.height(5.dp))
                     Text(text = item.context)
+                    Spacer(modifier = Modifier.height(10.dp))
                 }
             }
         }

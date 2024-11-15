@@ -5,14 +5,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SummaryReportResponseDto(
-    @SerialName("session_id")
-    val sessionId: Int,
-    @SerialName("created_at")
-    val createdAt: String,
     @SerialName("title")
     val title: String,
     @SerialName("contents")
-    val contents: List<Content>
+    val contents: List<Content>,
+    @SerialName("created_at")
+    val createdAt: String,
+    @SerialName("session_id")
+    val sessionId: Int
 )
 
 @Serializable
@@ -22,7 +22,5 @@ data class Content(
     @SerialName("subtitle")
     val subtitle: String,
     @SerialName("context")
-    val context: String,
-    @SerialName("created_at")
-    val createdAt: String
+    val context: String
 )

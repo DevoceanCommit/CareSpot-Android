@@ -6,6 +6,7 @@ import com.devocean.domain.entity.chat.SummaryReport
 fun SummaryReportResponseDto.toContext(): List<SummaryReport> =
     this.contents.map { content ->
         SummaryReport(
+            subtitle = content.subtitle,
             context = content.context
         )
     }
