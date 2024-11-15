@@ -55,8 +55,6 @@ class SelectedChatViewModel @Inject constructor(
         viewModelScope.launch {
             repository.getSummaryReport(sessionId)
                 .onSuccess { summary ->
-                    _sideEffect.emit(SelectedChatSideEffect.ShowToast(R.string.server_success))
-
                     _state.update { currentState ->
                         currentState.copy(summary = summary.map { it.toSummaryReportModel() }
                             .toPersistentList())
