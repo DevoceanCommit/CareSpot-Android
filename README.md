@@ -1,4 +1,4 @@
-# Spot Call 
+# Care Spot
 
 <img width="50" src="https://github.com/user-attachments/assets/c09a7458-792e-4ccf-8fd3-d0459bca872e"> Devocean Young Project 
 
